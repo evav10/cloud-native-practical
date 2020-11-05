@@ -33,7 +33,7 @@ public class ShoppingListController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ShoppingListResource createShoppingList(@RequestBody ShoppingListResource shoppingListResource) {
-        return new ShoppingListResource(UUID.randomUUID(), shoppingListResource.getName());
+        return new ShoppingListResource(shoppingListResource.getName());
     }
 
     @PostMapping(value = "/{shoppingListId}/cocktails")
