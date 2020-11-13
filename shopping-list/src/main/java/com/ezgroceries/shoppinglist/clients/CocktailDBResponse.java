@@ -1,6 +1,10 @@
 package com.ezgroceries.shoppinglist.clients;
 
+import com.google.common.base.Strings;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CocktailDBResponse {
 
@@ -36,6 +40,7 @@ public class CocktailDBResponse {
         private String strIngredient13;
         private String strIngredient14;
         private String strIngredient15;
+        private Set<String> ingredients;
 
         public String getIdDrink() {
             return idDrink;
@@ -195,6 +200,31 @@ public class CocktailDBResponse {
 
         public void setStrIngredient15(String strIngredient15) {
             this.strIngredient15 = strIngredient15;
+        }
+
+        public Set<String> getIngredients() {
+            return Stream.of(
+                    this.getStrIngredient1(),
+                    this.getStrIngredient2(),
+                    this.getStrIngredient3(),
+                    this.getStrIngredient4(),
+                    this.getStrIngredient5(),
+                    this.getStrIngredient6(),
+                    this.getStrIngredient7(),
+                    this.getStrIngredient8(),
+                    this.getStrIngredient9(),
+                    this.getStrIngredient10(),
+                    this.getStrIngredient11(),
+                    this.getStrIngredient12(),
+                    this.getStrIngredient13(),
+                    this.getStrIngredient14(),
+                    this.getStrIngredient15()
+            ).filter(i -> !Strings.isNullOrEmpty(i)
+            ).collect(Collectors.toSet());
+        }
+
+        public void setIngredients(Set<String> ingredients) {
+            this.ingredients = ingredients;
         }
     }
 }

@@ -5,7 +5,6 @@ import com.ezgroceries.shoppinglist.clients.CocktailDBResponse;
 import com.ezgroceries.shoppinglist.clients.CocktailDBResponse.DrinkResource;
 import com.ezgroceries.shoppinglist.resources.CocktailResource;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -39,13 +38,7 @@ public class CocktailService {
         cocktailResource.setGlass(drinkResource.getStrGlass());
         cocktailResource.setImage(drinkResource.getStrDrinkThumb());
         cocktailResource.setInstructions(drinkResource.getStrInstructions());
-        List<String> ingredients = Arrays.asList(drinkResource.getStrIngredient1(), drinkResource.getStrIngredient2(),
-                drinkResource.getStrIngredient3(), drinkResource.getStrIngredient4(), drinkResource.getStrIngredient5(),
-                drinkResource.getStrIngredient6(), drinkResource.getStrIngredient7(), drinkResource.getStrIngredient8(),
-                drinkResource.getStrIngredient9(), drinkResource.getStrIngredient10(), drinkResource.getStrIngredient11(),
-                drinkResource.getStrIngredient12(), drinkResource.getStrIngredient13(), drinkResource.getStrIngredient14(),
-                drinkResource.getStrIngredient15());
-        cocktailResource.setIngredients(ingredients);
+        cocktailResource.setIngredients(drinkResource.getIngredients());
         return cocktailResource;
     }
 }
