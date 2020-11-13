@@ -11,7 +11,6 @@ import com.ezgroceries.shoppinglist.resources.ShoppingListResource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -78,7 +77,7 @@ class ShoppingListControllerTest {
 
     @Test
     void addCocktailToShoppingList() throws Exception {
-        List<CocktailResource> cocktailResources = Arrays.asList(new CocktailResource(UUID.randomUUID(), null, null, null, null, null));
+        List<CocktailResource> cocktailResources = Arrays.asList(new CocktailResource("RANDOMID", null, null, null, null, null));
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/shopping-lists/{id}/cocktails", "97c8e5bd-5353-426e-b57b-69eb2260ace3")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -86,7 +85,7 @@ class ShoppingListControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].cocktailId").value(any(String.class)));
+                .andExpect(jsonPath("$[0].cocktailId").value("RANDOMID"));
     }
 
     // Utility class for converting an object into JSON string
