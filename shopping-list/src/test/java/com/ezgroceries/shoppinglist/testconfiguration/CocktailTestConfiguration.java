@@ -4,8 +4,8 @@ import com.ezgroceries.shoppinglist.model.external.CocktailDBResponse;
 import com.ezgroceries.shoppinglist.model.external.CocktailDBResponse.DrinkResource;
 import com.ezgroceries.shoppinglist.model.internal.Cocktail;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.boot.test.context.TestConfiguration;
 
 @TestConfiguration
@@ -26,13 +26,13 @@ public class CocktailTestConfiguration {
     public static String SALT = "Salt";
     public static String BLUE_CURACAO = "Blue Curacao";
 
-    public static List<Cocktail> getDummyResources() {
+    public static List<Cocktail> getDummyCocktails() {
 
         return Arrays.asList(
                 new Cocktail(COCKTAIL_ID, MARGERITA, COCKTAIL_GLASS, INSTRUCTIONS, IMAGE,
-                        new HashSet<>(Arrays.asList(TEQUILA, TRIPLE_SEC, LIME_JUICE, SALT))),
+                        Arrays.asList(TEQUILA, TRIPLE_SEC, LIME_JUICE, SALT).stream().collect(Collectors.toSet())),
                 new Cocktail(ANOTHER_COCKTAIL_ID, BLUE_MARGERITA, COCKTAIL_GLASS, OTHER_INSTRUCTIONS, ANOTHER_IMAGE,
-                        new HashSet<>(Arrays.asList(TEQUILA, BLUE_CURACAO, LIME_JUICE, SALT))));
+                        Arrays.asList(TEQUILA, BLUE_CURACAO, LIME_JUICE, SALT).stream().collect(Collectors.toSet())));
     }
 
     public static CocktailDBResponse getdummyDBResponse() {
