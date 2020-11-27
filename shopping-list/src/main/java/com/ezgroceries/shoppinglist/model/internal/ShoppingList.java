@@ -1,26 +1,23 @@
-package com.ezgroceries.shoppinglist.resources;
+package com.ezgroceries.shoppinglist.model.internal;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
-@JsonInclude(Include.NON_NULL)
-public class ShoppingListResource {
+public class ShoppingList {
 
     private UUID shoppingListId;
     private String name;
-    private List<String> ingredients;
+    private Set<String> ingredients;
 
-    public ShoppingListResource() {
+    public ShoppingList() {
     }
 
-    public ShoppingListResource(String name) {
+    public ShoppingList(String name) {
         this.shoppingListId = UUID.randomUUID();
         this.name = name;
     }
 
-    public ShoppingListResource(UUID shoppingListId, String name, List<String> ingredients) {
+    public ShoppingList(UUID shoppingListId, String name, Set<String> ingredients) {
         this.shoppingListId = shoppingListId;
         this.name = name;
         this.ingredients = ingredients;
@@ -42,11 +39,11 @@ public class ShoppingListResource {
         this.name = name;
     }
 
-    public List<String> getIngredients() {
+    public Set<String> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<String> ingredients) {
+    public void setIngredients(Set<String> ingredients) {
         this.ingredients = ingredients;
     }
 }
