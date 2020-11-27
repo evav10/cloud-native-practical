@@ -6,8 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.ezgroceries.shoppinglist.resources.CocktailResource;
-import com.ezgroceries.shoppinglist.resources.ShoppingListResource;
+import com.ezgroceries.shoppinglist.model.internal.Cocktail;
+import com.ezgroceries.shoppinglist.model.internal.ShoppingList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 import java.util.List;
@@ -64,11 +64,11 @@ class ShoppingListControllerTest {
 
     @Test
     void createShoppingList() throws Exception {
-        ShoppingListResource shoppingListResource = new ShoppingListResource("name");
+        ShoppingList shoppingList = new ShoppingList("name");
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/shopping-lists")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(shoppingListResource)))
+                .content(asJsonString(shoppingList)))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("shoppingListId").value(any(String.class)))
@@ -77,11 +77,11 @@ class ShoppingListControllerTest {
 
     @Test
     void addCocktailToShoppingList() throws Exception {
-        List<CocktailResource> cocktailResources = Arrays.asList(new CocktailResource("RANDOMID", null, null, null, null, null));
+        List<Cocktail> cocktails = Arrays.asList(new Cocktail("RANDOMID", null, null, null, null, null));
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/shopping-lists/{id}/cocktails", "97c8e5bd-5353-426e-b57b-69eb2260ace3")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(cocktailResources)))
+                .content(asJsonString(cocktails)))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))

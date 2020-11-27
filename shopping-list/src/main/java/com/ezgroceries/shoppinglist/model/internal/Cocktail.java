@@ -1,8 +1,8 @@
-package com.ezgroceries.shoppinglist.resources;
+package com.ezgroceries.shoppinglist.model.internal;
 
 import java.util.Set;
 
-public class CocktailResource {
+public class Cocktail {
 
     private String cocktailId;
     private String name;
@@ -11,10 +11,10 @@ public class CocktailResource {
     private String image;
     private Set<String> ingredients;
 
-    public CocktailResource() {
+    public Cocktail() {
     }
 
-    public CocktailResource(String cocktailId, String name, String glass, String instructions, String image, Set<String> ingredients) {
+    public Cocktail(String cocktailId, String name, String glass, String instructions, String image, Set<String> ingredients) {
         this.cocktailId = cocktailId;
         this.name = name;
         this.glass = glass;

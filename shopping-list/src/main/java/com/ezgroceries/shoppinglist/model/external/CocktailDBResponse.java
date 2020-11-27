@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.clients;
+package com.ezgroceries.shoppinglist.model.external;
 
 import com.google.common.base.Strings;
 import java.util.List;

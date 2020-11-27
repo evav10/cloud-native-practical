@@ -1,8 +1,8 @@
 package com.ezgroceries.shoppinglist.testconfiguration;
 
-import com.ezgroceries.shoppinglist.clients.CocktailDBResponse;
-import com.ezgroceries.shoppinglist.clients.CocktailDBResponse.DrinkResource;
-import com.ezgroceries.shoppinglist.resources.CocktailResource;
+import com.ezgroceries.shoppinglist.model.external.CocktailDBResponse;
+import com.ezgroceries.shoppinglist.model.external.CocktailDBResponse.DrinkResource;
+import com.ezgroceries.shoppinglist.model.internal.Cocktail;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -26,12 +26,12 @@ public class CocktailTestConfiguration {
     public static String SALT = "Salt";
     public static String BLUE_CURACAO = "Blue Curacao";
 
-    public static List<CocktailResource> getDummyResources() {
+    public static List<Cocktail> getDummyResources() {
 
         return Arrays.asList(
-                new CocktailResource(COCKTAIL_ID, MARGERITA, COCKTAIL_GLASS, INSTRUCTIONS, IMAGE,
+                new Cocktail(COCKTAIL_ID, MARGERITA, COCKTAIL_GLASS, INSTRUCTIONS, IMAGE,
                         new HashSet<>(Arrays.asList(TEQUILA, TRIPLE_SEC, LIME_JUICE, SALT))),
-                new CocktailResource(ANOTHER_COCKTAIL_ID, BLUE_MARGERITA, COCKTAIL_GLASS, OTHER_INSTRUCTIONS, ANOTHER_IMAGE,
+                new Cocktail(ANOTHER_COCKTAIL_ID, BLUE_MARGERITA, COCKTAIL_GLASS, OTHER_INSTRUCTIONS, ANOTHER_IMAGE,
                         new HashSet<>(Arrays.asList(TEQUILA, BLUE_CURACAO, LIME_JUICE, SALT))));
     }
 
