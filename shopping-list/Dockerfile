@@ -6,4 +6,4 @@ RUN mvn -f /app/pom.xml clean install package -Dspring.profiles.active=hsqldb
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
 ADD target/*.jar app.jar
-ENTRYPOINT ["java","-Dspring.profiles.active=hsqldb","-jar","/app.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=hsqldb", "-jar", "/app.jar"]
