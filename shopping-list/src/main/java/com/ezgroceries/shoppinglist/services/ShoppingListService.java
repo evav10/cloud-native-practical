@@ -7,8 +7,10 @@ import com.ezgroceries.shoppinglist.model.internal.ShoppingList;
 import com.ezgroceries.shoppinglist.model.internal.ShoppingListEntity;
 import com.ezgroceries.shoppinglist.model.internal.ShoppingListRepository;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +83,16 @@ public class ShoppingListService {
         ShoppingList shoppingList = new ShoppingList();
         shoppingList.setShoppingListId(existingShoppingListEntity.get().getId());
         shoppingList.setName(existingShoppingListEntity.get().getName());
-        //TODO add ingredients
+        shoppingList.setIngredients(createIngredients(existingShoppingListEntity.get().getCocktailEntities()));
         return shoppingList;
     }
+
+    private Set<String> createIngredients(List<CocktailEntity> cocktailEntities) {
+        Set<String> ingredients = new HashSet<>();
+        for (int i = 0; i < cocktailEntities.size(); i++) {
+            ingredients.addAll(cocktailEntities.get(i).getIngredients());
+        }
+        return ingredients;
+    }
+
 }
