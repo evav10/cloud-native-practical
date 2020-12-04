@@ -2,6 +2,7 @@ package com.ezgroceries.shoppinglist.utils;
 
 import com.ezgroceries.shoppinglist.cocktail.persistence.entities.CocktailEntity;
 import com.ezgroceries.shoppinglist.cocktail.services.external.cocktailDB.CocktailDBResponse.DrinkResource;
+import com.ezgroceries.shoppinglist.meal.persistence.entities.MealEntity;
 import com.ezgroceries.shoppinglist.meal.services.mealDB.MealDBResponse.Meal;
 import com.google.common.base.Strings;
 import java.util.HashSet;
@@ -12,13 +13,16 @@ import java.util.stream.Stream;
 
 public class IngredientMapper {
 
-    public static Set<String> createIngredients(List<CocktailEntity> cocktailEntities) {
-        if (cocktailEntities == null) {
+    public static Set<String> createIngredients(List<CocktailEntity> cocktailEntities, List<MealEntity> mealEntities) {
+        if (cocktailEntities == null && mealEntities == null) {
             return null;
         }
         Set<String> ingredients = new HashSet<>();
         for (int i = 0; i < cocktailEntities.size(); i++) {
             ingredients.addAll(cocktailEntities.get(i).getIngredients());
+        }
+        for (int i = 0; i < mealEntities.size(); i++) {
+            ingredients.addAll(mealEntities.get(i).getIngredients());
         }
         return ingredients;
     }
