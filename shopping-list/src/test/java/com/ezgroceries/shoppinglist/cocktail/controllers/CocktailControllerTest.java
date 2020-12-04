@@ -1,24 +1,23 @@
-package com.ezgroceries.shoppinglist.controllers;
+package com.ezgroceries.shoppinglist.cocktail.controllers;
 
-import static com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration.ANOTHER_COCKTAIL_ID;
-import static com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration.ANOTHER_IMAGE;
-import static com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration.BLUE_MARGERITA;
-import static com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration.COCKTAIL_GLASS;
-import static com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration.COCKTAIL_ID;
-import static com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration.IMAGE;
-import static com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration.INSTRUCTIONS;
-import static com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration.MARGERITA;
-import static com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration.OTHER_INSTRUCTIONS;
-import static com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration.getDummyCocktails;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.ANOTHER_COCKTAIL_ID;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.ANOTHER_IMAGE;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.BLUE_MARGERITA;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.COCKTAIL_GLASS;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.COCKTAIL_ID;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.IMAGE;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.INSTRUCTIONS;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.MARGERITA;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.OTHER_INSTRUCTIONS;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.getDummyCocktails;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.ezgroceries.shoppinglist.cocktail.controllers.CocktailController;
 import com.ezgroceries.shoppinglist.cocktail.services.CocktailService;
-import com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration;
+import com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

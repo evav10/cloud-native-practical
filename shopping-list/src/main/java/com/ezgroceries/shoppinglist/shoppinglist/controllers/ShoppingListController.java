@@ -1,9 +1,9 @@
-package com.ezgroceries.shoppinglist.controllers;
+package com.ezgroceries.shoppinglist.shoppinglist.controllers;
 
-import com.ezgroceries.shoppinglist.model.internal.Cocktail;
-import com.ezgroceries.shoppinglist.model.internal.ShoppingList;
-import com.ezgroceries.shoppinglist.model.internal.ShoppingListEntity;
-import com.ezgroceries.shoppinglist.services.ShoppingListService;
+import com.ezgroceries.shoppinglist.cocktail.controllers.contracts.CocktailRequest;
+import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.CreateShoppingListRequest;
+import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.ShoppingListResponse;
+import com.ezgroceries.shoppinglist.shoppinglist.services.ShoppingListService;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;
@@ -26,25 +26,25 @@ public class ShoppingListController {
     }
 
     @GetMapping(value = "/{shoppingListId}")
-    public ShoppingList getShoppingList(@PathVariable UUID shoppingListId) {
+    public ShoppingListResponse getShoppingList(@PathVariable UUID shoppingListId) {
         return shoppingListService.getShoppingList(shoppingListId);
     }
 
     @GetMapping
-    public List<ShoppingList> getAllShoppingListsJpa() {
+    public List<ShoppingListResponse> getAllShoppingListsJpa() {
         return shoppingListService.getAllShoppingLists();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ShoppingListEntity createShoppingList(@RequestBody ShoppingList shoppingList) {
-        return shoppingListService.createShoppingList(shoppingList);
+    public ShoppingListResponse createShoppingList(@RequestBody CreateShoppingListRequest createShoppingListRequest) {
+        return shoppingListService.createShoppingList(createShoppingListRequest);
     }
 
     @PostMapping(value = "/{shoppingListId}/cocktails")
     @ResponseStatus(HttpStatus.CREATED)
-    public ShoppingList addCocktailToShoppingList(@PathVariable String shoppingListId,
-            @RequestBody List<Cocktail> cocktail) {
-        return shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktail);
+    public ShoppingListResponse addCocktailToShoppingList(@PathVariable String shoppingListId,
+            @RequestBody List<CocktailRequest> cocktails) {
+        return shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktails);
     }
 }

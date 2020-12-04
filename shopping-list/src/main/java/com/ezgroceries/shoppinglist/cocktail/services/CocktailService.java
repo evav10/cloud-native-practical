@@ -1,19 +1,17 @@
-package com.ezgroceries.shoppinglist.services;
+package com.ezgroceries.shoppinglist.cocktail.services;
 
-import com.ezgroceries.shoppinglist.clients.CocktailDBClient;
-import com.ezgroceries.shoppinglist.model.external.CocktailDBResponse;
-import com.ezgroceries.shoppinglist.model.external.CocktailDBResponse.DrinkResource;
-import com.ezgroceries.shoppinglist.model.internal.Cocktail;
-import com.ezgroceries.shoppinglist.model.internal.CocktailEntity;
-import com.ezgroceries.shoppinglist.model.internal.CocktailRepository;
-import com.google.common.base.Strings;
+import static com.ezgroceries.shoppinglist.utils.IngredientMapper.getDrinkIngredients;
+
+import com.ezgroceries.shoppinglist.cocktail.controllers.contracts.CocktailResponse;
+import com.ezgroceries.shoppinglist.cocktail.persistence.entities.CocktailEntity;
+import com.ezgroceries.shoppinglist.cocktail.persistence.repositories.CocktailRepository;
+import com.ezgroceries.shoppinglist.cocktail.services.external.cocktailDB.CocktailDBClient;
+import com.ezgroceries.shoppinglist.cocktail.services.external.cocktailDB.CocktailDBResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,19 +28,19 @@ public class CocktailService {
         this.cocktailRepository = cocktailRepository;
     }
 
-    public List<Cocktail> searchCocktail(String search) {
-        List<Cocktail> cocktails = new ArrayList<>();
+    public List<CocktailResponse> searchCocktail(String search) {
+        List<CocktailResponse> cocktailResponses = new ArrayList<>();
         try {
             CocktailDBResponse cocktailDBResponse = cocktailDBClient.searchCocktails(search);
-            cocktails = mergeCocktails(cocktailDBResponse.getDrinks());
+            cocktailResponses = mergeCocktails(cocktailDBResponse.getDrinks());
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        return cocktails;
+        return cocktailResponses;
     }
 
-    public List<Cocktail> mergeCocktails(List<CocktailDBResponse.DrinkResource> drinks) {
+    public List<CocktailResponse> mergeCocktails(List<CocktailDBResponse.DrinkResource> drinks) {
         //Get all the idDrink attributes
         List<String> ids = drinks.stream().map(CocktailDBResponse.DrinkResource::getIdDrink).collect(Collectors.toList());
 
@@ -58,7 +56,7 @@ public class CocktailService {
                 newCocktailEntity.setId(UUID.randomUUID());
                 newCocktailEntity.setIdDrink(drinkResource.getIdDrink());
                 newCocktailEntity.setName(drinkResource.getStrDrink());
-                newCocktailEntity.setIngredients(getIngredients(drinkResource));
+                newCocktailEntity.setIngredients(getDrinkIngredients(drinkResource));
                 cocktailEntity = cocktailRepository.save(newCocktailEntity);
             }
             return cocktailEntity;
@@ -68,30 +66,10 @@ public class CocktailService {
         return mergeAndTransform(drinks, allEntityMap);
     }
 
-    private List<Cocktail> mergeAndTransform(List<CocktailDBResponse.DrinkResource> drinks, Map<String, CocktailEntity> allEntityMap) {
-        return drinks.stream().map(drinkResource -> new Cocktail(allEntityMap.get(drinkResource.getIdDrink()).getId().toString(),
+    private List<CocktailResponse> mergeAndTransform(List<CocktailDBResponse.DrinkResource> drinks, Map<String, CocktailEntity> allEntityMap) {
+        return drinks.stream().map(drinkResource -> new CocktailResponse(allEntityMap.get(drinkResource.getIdDrink()).getId().toString(),
                 drinkResource.getStrDrink(), drinkResource.getStrGlass(),
-                drinkResource.getStrInstructions(), drinkResource.getStrDrinkThumb(), getIngredients(drinkResource))).collect(Collectors.toList());
-    }
-
-    private Set<String> getIngredients(DrinkResource drinkResource) {
-        return Stream.of(
-                drinkResource.getStrIngredient1(),
-                drinkResource.getStrIngredient2(),
-                drinkResource.getStrIngredient3(),
-                drinkResource.getStrIngredient4(),
-                drinkResource.getStrIngredient5(),
-                drinkResource.getStrIngredient6(),
-                drinkResource.getStrIngredient7(),
-                drinkResource.getStrIngredient8(),
-                drinkResource.getStrIngredient9(),
-                drinkResource.getStrIngredient10(),
-                drinkResource.getStrIngredient11(),
-                drinkResource.getStrIngredient12(),
-                drinkResource.getStrIngredient13(),
-                drinkResource.getStrIngredient14(),
-                drinkResource.getStrIngredient15()
-        ).filter(i -> !Strings.isNullOrEmpty(i)
-        ).collect(Collectors.toSet());
+                drinkResource.getStrInstructions(), drinkResource.getStrDrinkThumb(), getDrinkIngredients(drinkResource)))
+                .collect(Collectors.toList());
     }
 }

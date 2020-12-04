@@ -2,7 +2,7 @@ package com.ezgroceries.shoppinglist.cocktail.controllers.contracts;
 
 import java.util.Set;
 
-public class Cocktail {
+public class CocktailResponse {
 
     private String cocktailId;
     private String name;
@@ -11,10 +11,10 @@ public class Cocktail {
     private String image;
     private Set<String> ingredients;
 
-    public Cocktail() {
+    public CocktailResponse() {
     }
 
-    public Cocktail(String cocktailId, String name, String glass, String instructions, String image, Set<String> ingredients) {
+    public CocktailResponse(String cocktailId, String name, String glass, String instructions, String image, Set<String> ingredients) {
         this.cocktailId = cocktailId;
         this.name = name;
         this.glass = glass;

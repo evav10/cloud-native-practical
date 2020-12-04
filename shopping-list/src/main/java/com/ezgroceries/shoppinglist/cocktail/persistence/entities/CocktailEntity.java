@@ -1,5 +1,6 @@
-package com.ezgroceries.shoppinglist.model.internal;
+package com.ezgroceries.shoppinglist.cocktail.persistence.entities;
 
+import com.ezgroceries.shoppinglist.shoppinglist.persistence.entities.ShoppingListEntity;
 import com.ezgroceries.shoppinglist.utils.StringSetConverter;
 import java.util.List;
 import java.util.Set;

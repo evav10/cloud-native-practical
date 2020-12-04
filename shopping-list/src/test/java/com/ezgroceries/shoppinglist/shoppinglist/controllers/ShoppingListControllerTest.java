@@ -1,22 +1,21 @@
-package com.ezgroceries.shoppinglist.controllers;
+package com.ezgroceries.shoppinglist.shoppinglist.controllers;
 
-import static com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration.getDummyCocktails;
-import static com.ezgroceries.shoppinglist.testconfiguration.ShoppingListTestConfiguration.SHOPPING_LIST_ID;
-import static com.ezgroceries.shoppinglist.testconfiguration.ShoppingListTestConfiguration.SHOPPING_LIST_ID_AS_UUID;
-import static com.ezgroceries.shoppinglist.testconfiguration.ShoppingListTestConfiguration.SHOPPING_LIST_NAME;
-import static com.ezgroceries.shoppinglist.testconfiguration.ShoppingListTestConfiguration.getDummyShoppingList;
-import static com.ezgroceries.shoppinglist.testconfiguration.ShoppingListTestConfiguration.getDummyShoppingListEntity;
-import static com.ezgroceries.shoppinglist.testconfiguration.ShoppingListTestConfiguration.getDummyShoppingLists;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.getDummyCocktailRequest;
+import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.SHOPPING_LIST_ID;
+import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.SHOPPING_LIST_ID_AS_UUID;
+import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.SHOPPING_LIST_NAME;
+import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.getDummyShoppingList;
+import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.getDummyShoppingListRequest;
+import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.getDummyShoppingLists;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration;
 import com.ezgroceries.shoppinglist.shoppinglist.services.ShoppingListService;
-import com.ezgroceries.shoppinglist.shoppinglist.controllers.ShoppingListController;
-import com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration;
-import com.ezgroceries.shoppinglist.testconfiguration.ShoppingListTestConfiguration;
+import com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +66,7 @@ class ShoppingListControllerTest {
 
     @Test
     void createShoppingList() throws Exception {
-        given(shoppingListService.createShoppingList(getDummyShoppingList())).willReturn(getDummyShoppingListEntity());
+        given(shoppingListService.createShoppingList(getDummyShoppingListRequest())).willReturn(getDummyShoppingList());
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/shopping-lists")
@@ -78,11 +77,11 @@ class ShoppingListControllerTest {
 
     @Test
     void addCocktailToShoppingList() throws Exception {
-        given(shoppingListService.addCocktailsToShoppingList(SHOPPING_LIST_ID, getDummyCocktails())).willReturn(getDummyShoppingList());
+        given(shoppingListService.addCocktailsToShoppingList(SHOPPING_LIST_ID, getDummyCocktailRequest())).willReturn(getDummyShoppingList());
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/shopping-lists/{id}/cocktails", SHOPPING_LIST_ID)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(getDummyCocktails())))
+                .content(asJsonString(getDummyCocktailRequest())))
                 .andExpect(status().isCreated());
     }
 

@@ -3,21 +3,21 @@ package com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts;
 import java.util.Set;
 import java.util.UUID;
 
-public class ShoppingList {
+public class ShoppingListResponse {
 
     private UUID shoppingListId;
     private String name;
     private Set<String> ingredients;
 
-    public ShoppingList() {
+    public ShoppingListResponse() {
     }
 
-    public ShoppingList(String name) {
+    public ShoppingListResponse(String name) {
         this.shoppingListId = UUID.randomUUID();
         this.name = name;
     }
 
-    public ShoppingList(UUID shoppingListId, String name, Set<String> ingredients) {
+    public ShoppingListResponse(UUID shoppingListId, String name, Set<String> ingredients) {
         this.shoppingListId = shoppingListId;
         this.name = name;
         this.ingredients = ingredients;

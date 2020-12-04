@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.model.external;
+package com.ezgroceries.shoppinglist.cocktail.services.external.cocktailDB;
 
 import com.google.common.base.Strings;
 import java.util.List;

@@ -1,8 +1,9 @@
-package com.ezgroceries.shoppinglist.testconfiguration;
+package com.ezgroceries.shoppinglist.cocktail.testconfiguration;
 
+import com.ezgroceries.shoppinglist.cocktail.controllers.contracts.CocktailRequest;
+import com.ezgroceries.shoppinglist.cocktail.controllers.contracts.CocktailResponse;
 import com.ezgroceries.shoppinglist.cocktail.services.external.cocktailDB.CocktailDBResponse;
 import com.ezgroceries.shoppinglist.cocktail.services.external.cocktailDB.CocktailDBResponse.DrinkResource;
-import com.ezgroceries.shoppinglist.cocktail.controllers.contracts.Cocktail;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,13 +27,18 @@ public class CocktailTestConfiguration {
     public static String SALT = "Salt";
     public static String BLUE_CURACAO = "Blue Curacao";
 
-    public static List<Cocktail> getDummyCocktails() {
+    public static List<CocktailResponse> getDummyCocktails() {
 
         return Arrays.asList(
-                new Cocktail(COCKTAIL_ID, MARGERITA, COCKTAIL_GLASS, INSTRUCTIONS, IMAGE,
+                new CocktailResponse(COCKTAIL_ID, MARGERITA, COCKTAIL_GLASS, INSTRUCTIONS, IMAGE,
                         Arrays.asList(TEQUILA, TRIPLE_SEC, LIME_JUICE, SALT).stream().collect(Collectors.toSet())),
-                new Cocktail(ANOTHER_COCKTAIL_ID, BLUE_MARGERITA, COCKTAIL_GLASS, OTHER_INSTRUCTIONS, ANOTHER_IMAGE,
+                new CocktailResponse(ANOTHER_COCKTAIL_ID, BLUE_MARGERITA, COCKTAIL_GLASS, OTHER_INSTRUCTIONS, ANOTHER_IMAGE,
                         Arrays.asList(TEQUILA, BLUE_CURACAO, LIME_JUICE, SALT).stream().collect(Collectors.toSet())));
+    }
+
+    public static List<CocktailRequest> getDummyCocktailRequest() {
+        return Arrays.asList(
+                new CocktailRequest(COCKTAIL_ID), new CocktailRequest(ANOTHER_COCKTAIL_ID));
     }
 
     public static CocktailDBResponse getdummyDBResponse() {
