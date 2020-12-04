@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface CocktailRepository extends JpaRepository<CocktailEntity, UUID> {
 
     List<CocktailEntity> findByIdDrinkIn(List<String> ids);
+
+    List<CocktailEntity> findByNameContainingIgnoreCase(String search);
 }

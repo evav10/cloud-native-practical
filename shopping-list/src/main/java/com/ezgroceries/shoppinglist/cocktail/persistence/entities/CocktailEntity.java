@@ -32,6 +32,15 @@ public class CocktailEntity {
     @Column(name = "INGREDIENTS")
     private Set<String> ingredients;
 
+    @Column(name = "GLASS")
+    private String glass;
+
+    @Column(name = "INSTRUCTIONS")
+    private String instructions;
+
+    @Column(name = "IMAGE_LINK")
+    private String image_Link;
+
     @ManyToMany
     @JoinTable(
             name = "COCKTAIL_SHOPPING_LIST",
@@ -78,5 +87,29 @@ public class CocktailEntity {
 
     public void setShoppingListEntities(List<ShoppingListEntity> shoppingListEntities) {
         this.shoppingListEntities = shoppingListEntities;
+    }
+
+    public String getGlass() {
+        return glass;
+    }
+
+    public void setGlass(String glass) {
+        this.glass = glass;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
+    public String getImage_Link() {
+        return image_Link;
+    }
+
+    public void setImage_Link(String image_Link) {
+        this.image_Link = image_Link;
     }
 }
