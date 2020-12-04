@@ -13,7 +13,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.ezgroceries.shoppinglist.services.ShoppingListService;
+import com.ezgroceries.shoppinglist.shoppinglist.services.ShoppingListService;
+import com.ezgroceries.shoppinglist.shoppinglist.controllers.ShoppingListController;
 import com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration;
 import com.ezgroceries.shoppinglist.testconfiguration.ShoppingListTestConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;

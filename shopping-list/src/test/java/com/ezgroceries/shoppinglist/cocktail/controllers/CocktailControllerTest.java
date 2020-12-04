@@ -16,7 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.ezgroceries.shoppinglist.services.CocktailService;
+import com.ezgroceries.shoppinglist.cocktail.controllers.CocktailController;
+import com.ezgroceries.shoppinglist.cocktail.services.CocktailService;
 import com.ezgroceries.shoppinglist.testconfiguration.CocktailTestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

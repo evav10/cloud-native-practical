@@ -1,7 +1,7 @@
 package com.ezgroceries.shoppinglist.testconfiguration;
 
-import com.ezgroceries.shoppinglist.model.internal.ShoppingList;
-import com.ezgroceries.shoppinglist.model.internal.ShoppingListEntity;
+import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.ShoppingList;
+import com.ezgroceries.shoppinglist.shoppinglist.persistence.entities.ShoppingListEntity;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

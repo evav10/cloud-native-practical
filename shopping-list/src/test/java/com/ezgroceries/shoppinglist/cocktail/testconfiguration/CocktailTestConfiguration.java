@@ -1,8 +1,8 @@
 package com.ezgroceries.shoppinglist.testconfiguration;
 
-import com.ezgroceries.shoppinglist.model.external.CocktailDBResponse;
-import com.ezgroceries.shoppinglist.model.external.CocktailDBResponse.DrinkResource;
-import com.ezgroceries.shoppinglist.model.internal.Cocktail;
+import com.ezgroceries.shoppinglist.cocktail.services.external.cocktailDB.CocktailDBResponse;
+import com.ezgroceries.shoppinglist.cocktail.services.external.cocktailDB.CocktailDBResponse.DrinkResource;
+import com.ezgroceries.shoppinglist.cocktail.controllers.contracts.Cocktail;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

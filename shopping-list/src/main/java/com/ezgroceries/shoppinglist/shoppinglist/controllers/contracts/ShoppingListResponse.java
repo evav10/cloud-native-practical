@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.model.internal;
+package com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts;
 
 import java.util.Set;
 import java.util.UUID;

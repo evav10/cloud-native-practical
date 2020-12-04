@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.model.internal;
+package com.ezgroceries.shoppinglist.cocktail.controllers.contracts;
 
 import java.util.Set;
 
