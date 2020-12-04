@@ -8,11 +8,12 @@ import java.util.Optional;
 
 public class ShoppingListMapper {
 
-    public static ShoppingListResponse mapShoppingList(Optional<ShoppingListEntity> existingShoppingListEntity) {
+    public static ShoppingListResponse mapShoppingList(Optional<ShoppingListEntity> shoppingListEntity) {
         ShoppingListResponse shoppingListResponse = new ShoppingListResponse();
-        shoppingListResponse.setShoppingListId(existingShoppingListEntity.get().getId());
-        shoppingListResponse.setName(existingShoppingListEntity.get().getName());
-        shoppingListResponse.setIngredients(createIngredients(existingShoppingListEntity.get().getCocktailEntities()));
+        shoppingListResponse.setShoppingListId(shoppingListEntity.get().getId());
+        shoppingListResponse.setName(shoppingListEntity.get().getName());
+        shoppingListResponse
+                .setIngredients(createIngredients(shoppingListEntity.get().getCocktailEntities(), shoppingListEntity.get().getMealEntities()));
         return shoppingListResponse;
     }
 }

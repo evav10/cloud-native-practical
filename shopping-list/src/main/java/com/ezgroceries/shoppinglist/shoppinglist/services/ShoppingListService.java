@@ -5,6 +5,9 @@ import static com.ezgroceries.shoppinglist.shoppinglist.utils.ShoppingListMapper
 import com.ezgroceries.shoppinglist.cocktail.controllers.contracts.CocktailRequest;
 import com.ezgroceries.shoppinglist.cocktail.persistence.entities.CocktailEntity;
 import com.ezgroceries.shoppinglist.cocktail.persistence.repositories.CocktailRepository;
+import com.ezgroceries.shoppinglist.meal.controllers.contracts.MealRequest;
+import com.ezgroceries.shoppinglist.meal.persistence.entities.MealEntity;
+import com.ezgroceries.shoppinglist.meal.persistence.repositories.MealRepository;
 import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.CreateShoppingListRequest;
 import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.ShoppingListResponse;
 import com.ezgroceries.shoppinglist.shoppinglist.persistence.entities.ShoppingListEntity;
@@ -26,9 +29,14 @@ public class ShoppingListService {
     @Autowired
     private final CocktailRepository cocktailRepository;
 
-    public ShoppingListService(ShoppingListRepository shoppingListRepository, CocktailRepository cocktailRepository) {
+    @Autowired
+    private final MealRepository mealRepository;
+
+    public ShoppingListService(ShoppingListRepository shoppingListRepository, CocktailRepository cocktailRepository,
+            MealRepository mealRepository) {
         this.shoppingListRepository = shoppingListRepository;
         this.cocktailRepository = cocktailRepository;
+        this.mealRepository = mealRepository;
     }
 
     public ShoppingListResponse createShoppingList(CreateShoppingListRequest createShoppingListRequest) {
@@ -62,6 +70,27 @@ public class ShoppingListService {
         shoppingListRepository.save(shoppingListEntity);
         return mapShoppingList(Optional.of(shoppingListEntity));
     }
+
+    public ShoppingListResponse addMealsToShoppingList(String shoppingListId, List<MealRequest> meals) {
+        ShoppingListEntity shoppingListEntity = shoppingListRepository.findById(UUID.fromString(shoppingListId)).get();
+        if (shoppingListEntity == null) {
+            throw new RuntimeException("shopping list not found");
+        }
+        List<MealEntity> linkedMealEntities = shoppingListEntity.getMealEntities().stream().collect(Collectors.toList());
+        for (int i = 0; i < meals.size(); i++) {
+            MealEntity mealEntity = mealRepository.findById(UUID.fromString(meals.get(i).getMealId())).get();
+            if (mealEntity == null) {
+                throw new RuntimeException("meal not found");
+            }
+            if (linkedMealEntities.contains(mealEntity)) {
+            } else {
+                shoppingListEntity.getMealEntities().add(mealEntity);
+            }
+        }
+        shoppingListRepository.save(shoppingListEntity);
+        return mapShoppingList(Optional.of(shoppingListEntity));
+    }
+
 
     public ShoppingListResponse getShoppingList(UUID shoppingListId) {
         Optional<ShoppingListEntity> existingShoppingListEntity = shoppingListRepository.findById(shoppingListId);

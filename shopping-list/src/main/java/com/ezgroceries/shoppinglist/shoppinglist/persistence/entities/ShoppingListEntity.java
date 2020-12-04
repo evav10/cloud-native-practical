@@ -1,6 +1,7 @@
 package com.ezgroceries.shoppinglist.shoppinglist.persistence.entities;
 
 import com.ezgroceries.shoppinglist.cocktail.persistence.entities.CocktailEntity;
+import com.ezgroceries.shoppinglist.meal.persistence.entities.MealEntity;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -29,6 +30,13 @@ public class ShoppingListEntity {
             inverseJoinColumns = {@JoinColumn(name = "cocktail_id")})
     private List<CocktailEntity> cocktailEntities;
 
+    @ManyToMany
+    @JoinTable(
+            name = "MEAL_SHOPPING_LIST",
+            joinColumns = {@JoinColumn(name = "shopping_list_id")},
+            inverseJoinColumns = {@JoinColumn(name = "meal_id")})
+    private List<MealEntity> mealEntities;
+
     public UUID getId() {
         return id;
     }
@@ -51,5 +59,13 @@ public class ShoppingListEntity {
 
     public void setCocktailEntities(List<CocktailEntity> cocktailEntities) {
         this.cocktailEntities = cocktailEntities;
+    }
+
+    public List<MealEntity> getMealEntities() {
+        return mealEntities;
+    }
+
+    public void setMealEntities(List<MealEntity> mealEntities) {
+        this.mealEntities = mealEntities;
     }
 }
