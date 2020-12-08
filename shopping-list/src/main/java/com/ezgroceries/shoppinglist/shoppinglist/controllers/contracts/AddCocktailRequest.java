@@ -1,13 +1,13 @@
-package com.ezgroceries.shoppinglist.cocktail.controllers.contracts;
+package com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts;
 
-public class CocktailRequest {
+public class AddCocktailRequest {
 
     private String cocktailId;
 
-    public CocktailRequest() {
+    public AddCocktailRequest() {
     }
 
-    public CocktailRequest(String cocktailId) {
+    public AddCocktailRequest(String cocktailId) {
         this.cocktailId = cocktailId;
     }
 

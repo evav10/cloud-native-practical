@@ -1,5 +1,10 @@
 package com.ezgroceries.shoppinglist.shoppinglist.testconfiguration;
 
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.ANOTHER_COCKTAIL_ID;
+import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.COCKTAIL_ID;
+
+import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.AddCocktailRequest;
+import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.AddMealRequest;
 import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.CreateShoppingListRequest;
 import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.ShoppingListResponse;
 import com.ezgroceries.shoppinglist.shoppinglist.persistence.entities.ShoppingListEntity;
@@ -40,5 +45,15 @@ public class ShoppingListTestConfiguration {
         shoppingListEntity.setName(SHOPPING_LIST_NAME);
         shoppingListEntity.setCocktailEntities(Collections.emptyList());
         return shoppingListEntity;
+    }
+
+    public static List<AddCocktailRequest> getDummyAddCocktailRequest() {
+        return Arrays.asList(
+                new AddCocktailRequest(COCKTAIL_ID), new AddCocktailRequest(ANOTHER_COCKTAIL_ID));
+    }
+
+    public static List<AddMealRequest> getDummyAddMealRequest() {
+        return Arrays.asList(
+                new AddMealRequest(COCKTAIL_ID), new AddMealRequest(ANOTHER_COCKTAIL_ID));
     }
 }

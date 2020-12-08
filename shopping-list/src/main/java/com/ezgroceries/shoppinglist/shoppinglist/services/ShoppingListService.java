@@ -2,12 +2,12 @@ package com.ezgroceries.shoppinglist.shoppinglist.services;
 
 import static com.ezgroceries.shoppinglist.shoppinglist.utils.ShoppingListMapper.mapShoppingList;
 
-import com.ezgroceries.shoppinglist.cocktail.controllers.contracts.CocktailRequest;
 import com.ezgroceries.shoppinglist.cocktail.persistence.entities.CocktailEntity;
 import com.ezgroceries.shoppinglist.cocktail.persistence.repositories.CocktailRepository;
-import com.ezgroceries.shoppinglist.meal.controllers.contracts.MealRequest;
 import com.ezgroceries.shoppinglist.meal.persistence.entities.MealEntity;
 import com.ezgroceries.shoppinglist.meal.persistence.repositories.MealRepository;
+import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.AddCocktailRequest;
+import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.AddMealRequest;
 import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.CreateShoppingListRequest;
 import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.ShoppingListResponse;
 import com.ezgroceries.shoppinglist.shoppinglist.persistence.entities.ShoppingListEntity;
@@ -51,7 +51,7 @@ public class ShoppingListService {
         return mapShoppingList(Optional.ofNullable(existingShoppingListEntity));
     }
 
-    public ShoppingListResponse addCocktailsToShoppingList(String shoppingListId, List<CocktailRequest> cocktails) {
+    public ShoppingListResponse addCocktailsToShoppingList(String shoppingListId, List<AddCocktailRequest> cocktails) {
         ShoppingListEntity shoppingListEntity = shoppingListRepository.findById(UUID.fromString(shoppingListId)).get();
         if (shoppingListEntity == null) {
             throw new RuntimeException("shopping list not found");
@@ -71,7 +71,7 @@ public class ShoppingListService {
         return mapShoppingList(Optional.of(shoppingListEntity));
     }
 
-    public ShoppingListResponse addMealsToShoppingList(String shoppingListId, List<MealRequest> meals) {
+    public ShoppingListResponse addMealsToShoppingList(String shoppingListId, List<AddMealRequest> meals) {
         ShoppingListEntity shoppingListEntity = shoppingListRepository.findById(UUID.fromString(shoppingListId)).get();
         if (shoppingListEntity == null) {
             throw new RuntimeException("shopping list not found");

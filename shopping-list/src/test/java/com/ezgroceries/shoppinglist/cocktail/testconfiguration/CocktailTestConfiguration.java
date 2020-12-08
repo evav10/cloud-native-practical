@@ -1,6 +1,5 @@
 package com.ezgroceries.shoppinglist.cocktail.testconfiguration;
 
-import com.ezgroceries.shoppinglist.cocktail.controllers.contracts.CocktailRequest;
 import com.ezgroceries.shoppinglist.cocktail.controllers.contracts.CocktailResponse;
 import com.ezgroceries.shoppinglist.cocktail.services.external.cocktailDB.CocktailDBResponse;
 import com.ezgroceries.shoppinglist.cocktail.services.external.cocktailDB.CocktailDBResponse.DrinkResource;
@@ -34,11 +33,6 @@ public class CocktailTestConfiguration {
                         Arrays.asList(TEQUILA, TRIPLE_SEC, LIME_JUICE, SALT).stream().collect(Collectors.toSet())),
                 new CocktailResponse(ANOTHER_COCKTAIL_ID, BLUE_MARGERITA, COCKTAIL_GLASS, OTHER_INSTRUCTIONS, ANOTHER_IMAGE,
                         Arrays.asList(TEQUILA, BLUE_CURACAO, LIME_JUICE, SALT).stream().collect(Collectors.toSet())));
-    }
-
-    public static List<CocktailRequest> getDummyCocktailRequest() {
-        return Arrays.asList(
-                new CocktailRequest(COCKTAIL_ID), new CocktailRequest(ANOTHER_COCKTAIL_ID));
     }
 
     public static CocktailDBResponse getdummyDBResponse() {

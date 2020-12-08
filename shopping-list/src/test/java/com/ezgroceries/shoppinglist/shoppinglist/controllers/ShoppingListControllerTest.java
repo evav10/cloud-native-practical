@@ -1,9 +1,10 @@
 package com.ezgroceries.shoppinglist.shoppinglist.controllers;
 
-import static com.ezgroceries.shoppinglist.cocktail.testconfiguration.CocktailTestConfiguration.getDummyCocktailRequest;
 import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.SHOPPING_LIST_ID;
 import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.SHOPPING_LIST_ID_AS_UUID;
 import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.SHOPPING_LIST_NAME;
+import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.getDummyAddCocktailRequest;
+import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.getDummyAddMealRequest;
 import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.getDummyShoppingList;
 import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.getDummyShoppingListRequest;
 import static com.ezgroceries.shoppinglist.shoppinglist.testconfiguration.ShoppingListTestConfiguration.getDummyShoppingLists;
@@ -77,11 +78,21 @@ class ShoppingListControllerTest {
 
     @Test
     void addCocktailToShoppingList() throws Exception {
-        given(shoppingListService.addCocktailsToShoppingList(SHOPPING_LIST_ID, getDummyCocktailRequest())).willReturn(getDummyShoppingList());
+        given(shoppingListService.addCocktailsToShoppingList(SHOPPING_LIST_ID, getDummyAddCocktailRequest())).willReturn(getDummyShoppingList());
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/shopping-lists/{id}/cocktails", SHOPPING_LIST_ID)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(getDummyCocktailRequest())))
+                .content(asJsonString(getDummyAddCocktailRequest())))
+                .andExpect(status().isCreated());
+    }
+
+    @Test
+    void addMealToShoppingList() throws Exception {
+        given(shoppingListService.addMealsToShoppingList(SHOPPING_LIST_ID, getDummyAddMealRequest())).willReturn(getDummyShoppingList());
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/shopping-lists/{id}/cocktails", SHOPPING_LIST_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(getDummyAddMealRequest())))
                 .andExpect(status().isCreated());
     }
 

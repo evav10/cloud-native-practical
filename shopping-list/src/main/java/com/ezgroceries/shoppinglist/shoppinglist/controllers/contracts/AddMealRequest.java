@@ -1,13 +1,13 @@
-package com.ezgroceries.shoppinglist.meal.controllers.contracts;
+package com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts;
 
-public class MealRequest {
+public class AddMealRequest {
 
     private String mealId;
 
-    public MealRequest() {
+    public AddMealRequest() {
     }
 
-    public MealRequest(String mealId) {
+    public AddMealRequest(String mealId) {
         this.mealId = mealId;
     }
 

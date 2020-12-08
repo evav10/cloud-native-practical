@@ -1,7 +1,7 @@
 package com.ezgroceries.shoppinglist.shoppinglist.controllers;
 
-import com.ezgroceries.shoppinglist.cocktail.controllers.contracts.CocktailRequest;
-import com.ezgroceries.shoppinglist.meal.controllers.contracts.MealRequest;
+import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.AddCocktailRequest;
+import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.AddMealRequest;
 import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.CreateShoppingListRequest;
 import com.ezgroceries.shoppinglist.shoppinglist.controllers.contracts.ShoppingListResponse;
 import com.ezgroceries.shoppinglist.shoppinglist.services.ShoppingListService;
@@ -45,14 +45,14 @@ public class ShoppingListController {
     @PostMapping(value = "/{shoppingListId}/cocktails")
     @ResponseStatus(HttpStatus.CREATED)
     public ShoppingListResponse addCocktailToShoppingList(@PathVariable String shoppingListId,
-            @RequestBody List<CocktailRequest> cocktails) {
+            @RequestBody List<AddCocktailRequest> cocktails) {
         return shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktails);
     }
 
     @PostMapping(value = "/{shoppingListId}/meals")
     @ResponseStatus(HttpStatus.CREATED)
     public ShoppingListResponse addMealToShoppingList(@PathVariable String shoppingListId,
-            @RequestBody List<MealRequest> meals) {
+            @RequestBody List<AddMealRequest> meals) {
         return shoppingListService.addMealsToShoppingList(shoppingListId, meals);
     }
 }
