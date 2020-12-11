@@ -57,18 +57,23 @@ public class ShoppingListService {
             throw new RuntimeException("shopping list not found");
         }
         List<CocktailEntity> linkedCocktailEntities = shoppingListEntity.getCocktailEntities().stream().collect(Collectors.toList());
-        for (int i = 0; i < cocktails.size(); i++) {
-            CocktailEntity cocktailEntity = cocktailRepository.findById(UUID.fromString(cocktails.get(i).getCocktailId())).get();
-            if (cocktailEntity == null) {
-                throw new RuntimeException("cocktail not found");
-            }
-            if (linkedCocktailEntities.contains(cocktailEntity)) {
-            } else {
-                shoppingListEntity.getCocktailEntities().add(cocktailEntity);
-            }
-        }
+        cocktails.stream().forEach(addCocktailRequest -> {
+            addCocktail(shoppingListEntity, linkedCocktailEntities, addCocktailRequest);
+        });
         shoppingListRepository.save(shoppingListEntity);
         return mapShoppingList(Optional.of(shoppingListEntity));
+    }
+
+    private void addCocktail(ShoppingListEntity shoppingListEntity, List<CocktailEntity> linkedCocktailEntities,
+            AddCocktailRequest addCocktailRequest) {
+        CocktailEntity cocktailEntity = cocktailRepository.findById(UUID.fromString(addCocktailRequest.getCocktailId())).get();
+        if (cocktailEntity == null) {
+            throw new RuntimeException("cocktail not found");
+        }
+        if (linkedCocktailEntities.contains(cocktailEntity)) {
+        } else {
+            shoppingListEntity.getCocktailEntities().add(cocktailEntity);
+        }
     }
 
     public ShoppingListResponse addMealsToShoppingList(String shoppingListId, List<AddMealRequest> meals) {
@@ -77,20 +82,23 @@ public class ShoppingListService {
             throw new RuntimeException("shopping list not found");
         }
         List<MealEntity> linkedMealEntities = shoppingListEntity.getMealEntities().stream().collect(Collectors.toList());
-        for (int i = 0; i < meals.size(); i++) {
-            MealEntity mealEntity = mealRepository.findById(UUID.fromString(meals.get(i).getMealId())).get();
-            if (mealEntity == null) {
-                throw new RuntimeException("meal not found");
-            }
-            if (linkedMealEntities.contains(mealEntity)) {
-            } else {
-                shoppingListEntity.getMealEntities().add(mealEntity);
-            }
-        }
+        meals.stream().forEach(addMealRequest -> {
+            addMeal(shoppingListEntity, linkedMealEntities, addMealRequest);
+        });
         shoppingListRepository.save(shoppingListEntity);
         return mapShoppingList(Optional.of(shoppingListEntity));
     }
 
+    private void addMeal(ShoppingListEntity shoppingListEntity, List<MealEntity> linkedMealEntities, AddMealRequest addMealRequest) {
+        MealEntity mealEntity = mealRepository.findById(UUID.fromString(addMealRequest.getMealId())).get();
+        if (mealEntity == null) {
+            throw new RuntimeException("meal not found");
+        }
+        if (linkedMealEntities.contains(mealEntity)) {
+        } else {
+            shoppingListEntity.getMealEntities().add(mealEntity);
+        }
+    }
 
     public ShoppingListResponse getShoppingList(UUID shoppingListId) {
         Optional<ShoppingListEntity> existingShoppingListEntity = shoppingListRepository.findById(shoppingListId);
@@ -103,9 +111,8 @@ public class ShoppingListService {
 
     public List<ShoppingListResponse> getAllShoppingLists() {
         List<ShoppingListResponse> shoppingListResponses = new ArrayList<ShoppingListResponse>();
-        for (ShoppingListEntity shoppingListEntity : shoppingListRepository.findAll()) {
-            shoppingListResponses.add(mapShoppingList(Optional.ofNullable(shoppingListEntity)));
-        }
+        shoppingListRepository.findAll().stream()
+                .forEach(shoppingListEntity -> shoppingListResponses.add(mapShoppingList(Optional.ofNullable(shoppingListEntity))));
         return shoppingListResponses;
     }
 }

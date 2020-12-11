@@ -18,12 +18,8 @@ public class IngredientMapper {
             return null;
         }
         Set<String> ingredients = new HashSet<>();
-        for (int i = 0; i < cocktailEntities.size(); i++) {
-            ingredients.addAll(cocktailEntities.get(i).getIngredients());
-        }
-        for (int i = 0; i < mealEntities.size(); i++) {
-            ingredients.addAll(mealEntities.get(i).getIngredients());
-        }
+        cocktailEntities.stream().forEach(cocktailEntity -> ingredients.addAll(cocktailEntity.getIngredients()));
+        mealEntities.stream().forEach(mealEntity -> ingredients.addAll(mealEntity.getIngredients()));
         return ingredients;
     }
 
